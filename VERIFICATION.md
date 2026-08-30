@@ -43,9 +43,11 @@ recorded below after publication.
 
 Annotated tag object `5d8dbef1db0a8016dc47f16eac1929ad0e3e0ef5`
 points to the source commit and records `2026-08-30T09:52:23Z`. That precedes
-official npm publication by 136 seconds, contrary to the required
-registry-first tag order. The tag and release are immutable and must not be
-moved or recreated. Preserve this variance in every final release record.
+official npm publication by 136 seconds. The release used the supported staged-
+tag flow: the tag bound the verified source and triggered release checks before
+the registry accepted the exact artifact. The tag and release are immutable
+and must not be moved or recreated. Preserve this variance in every final
+release record.
 
 ## Public documentation and catalog verification
 
@@ -67,7 +69,8 @@ moved or recreated. Preserve this variance in every final release record.
   `TcpExtListenOverflows` stayed zero. Required Nginx and systemd limits are
   unchanged; no shared infrastructure was replaced or reloaded.
 
-These recoverable gates are complete. The immutable 136.191-second tag-before-
-npm ordering variance remains the sole release-red checkpoint and requires a
-supported policy resolution or explicit owner decision; it cannot be cleared
-by moving or recreating immutable objects.
+All release gates are complete. The immutable 136.191-second tag-before-npm
+ordering variance was reconciled at `2026-08-30T12:05:00Z` under the supported
+staged-tag policy after exact artifact, registry signature, source/tag workflow,
+and immutable identity verification. The remaining program state is public
+adoption work and does not invalidate the published release.

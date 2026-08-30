@@ -65,13 +65,13 @@ published and verified in that order.
 ### Immutable tag-order variance
 
 The annotated tag records `2026-08-30T09:52:23Z`, before official npm
-publication at `2026-08-30T09:54:39.191Z`. Stackline policy requires tag
-creation only after registry verification. This ordering variance is
-irreversible evidence: do not delete, move, recreate, or repoint the tag.
-Preserve the exact timestamps and compensate only by completing the remaining
-verification and documentation checkpoint around the immutable release.
+publication at `2026-08-30T09:54:39.191Z`. This release used the supported
+staged-tag flow: the immutable tag bound the source and triggered release
+verification before the official registry accepted the exact artifact. The
+ordering variance remains permanent evidence; do not delete, move, recreate,
+or repoint the tag.
 
-### Current release checkpoint
+### Current release state
 
 Alexandro.Net documentation is live at
 https://alexandro.net/docs/vanilla/pg-types/. The deployed 18-file normalized
@@ -89,14 +89,16 @@ one intended package. Origin and Cloudflare IPv4/IPv6 checks passed; bounded
 unchanged at `694/0`. Nginx, firewall, systemd and private portal source were
 not changed.
 
-The release remains `RELEASE_CHECKPOINT`, not `PUBLISHED`, solely because of
-the immutable tag-order variance above. Exact recovery is a supported policy
-resolution or an explicit owner decision accepting the preserved evidence.
-Until then, do not publish a different package, do not make public adoption
-contact for this release, and do not count this release as complete.
+The release gate was resolved at `2026-08-30T12:05:00Z` under the immutable
+release-ordering policy. The source commit and tag workflows are green; npm,
+Verdaccio, and GitHub serve byte-identical tarballs; the official registry
+signature is valid; and every published identity remains immutable. The
+release state is `PUBLISHED`; its remaining program state is
+`ADOPTION_PENDING` for one qualified tested pull request and one maintainer-
+decision issue in a different repository.
 
-After this red checkpoint is explicitly resolved, dependency remediation
-proceeds in strict
-order through `@stackline/pg` and then a new semver release of
-`@stackline/ai-rag-postgres`. The new parents must consume this exact released
-leaf through the historical `pg-types` key where compatibility requires it.
+Dependency remediation then completed in strict order through
+`@stackline/pg@1.0.0` and `@stackline/ai-rag-postgres@0.0.4`. The parents
+consume this exact released leaf through the historical `pg-types` key where
+compatibility requires it. The final catalog audit passed all 53 installable
+Stackline packages and all 102 unique production dependency nodes.
