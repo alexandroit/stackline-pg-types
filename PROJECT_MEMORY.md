@@ -102,3 +102,20 @@ Dependency remediation then completed in strict order through
 consume this exact released leaf through the historical `pg-types` key where
 compatibility requires it. The final catalog audit passed all 53 installable
 Stackline packages and all 102 unique production dependency nodes.
+
+### Adoption checkpoint — 2026-08-30T13:22:52Z
+
+Fresh official npm, immutable GitHub tag/release, clean direct and historical-
+key alias consumers, package documentation, localized catalog snapshots,
+server-rendered home, robots and sitemap checks remain green. Live GitHub
+deduplication found no prior adoption contact for this release.
+
+Current public direct-use evidence was exhausted without a downstream that
+simultaneously passed repository activity, contribution policy, runtime
+compatibility, direct declaration and use, competing-change, and testability
+requirements. No pull request, issue, comment, review, reaction, or email was
+created. The exact `@stackline/pg-types@1.0.0` release therefore remains
+`ADOPTION_PENDING` for one qualified tested pull request and a maintainer-
+decision issue in a different repository. It continues to block a different
+package publication until that pair qualifies or an explicit user decision
+clears the checkpoint.
