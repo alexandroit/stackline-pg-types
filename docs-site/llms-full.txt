@@ -1,0 +1,93 @@
+# @stackline/pg-types full reference
+
+Canonical documentation: https://alexandro.net/docs/vanilla/pg-types/
+Package: https://www.npmjs.com/package/@stackline/pg-types
+Repository: https://github.com/alexandroit/stackline-pg-types
+
+`@stackline/pg-types@1.0.0` is an independent Stackline continuation of the
+MIT-licensed `pg-types@2.2.0` npm artifact. It is not affiliated with or
+endorsed by Brian M. Carlson, node-postgres, PostgreSQL, or the original
+dependency maintainers. PostgreSQL is a trademark of the PostgreSQL Community
+Association of Canada.
+
+## Installation
+
+Direct scoped install:
+
+`npm install @stackline/pg-types@1.0.0`
+
+Then use `require('@stackline/pg-types')` or ESM imports from the same name.
+
+Historical-key npm alias:
+
+`npm install pg-types@npm:@stackline/pg-types@1.0.0`
+
+The equivalent dependency value is
+`"pg-types": "npm:@stackline/pg-types@1.0.0"`, which preserves
+`require('pg-types')` without a source change.
+
+## Public API
+
+- `getTypeParser(oid, format?)` returns a registered text or binary parser.
+- `setTypeParser(oid, parser)` registers a text parser.
+- `setTypeParser(oid, format, parser)` registers an explicit text or binary
+  parser.
+- `arrayParser.create(source, transform?)` creates the historical incremental
+  PostgreSQL array parser.
+- `builtins` contains the complete `pg-types@2.2.0` built-in OID constants.
+- `TypeId` is a non-enumerable runtime alias of `builtins`, matching the
+  historical declaration without changing the original enumerable root keys.
+
+The package preserves CommonJS root and `lib/*` behavior. Explicit ESM default
+and named exports share the corresponding CommonJS function identities.
+Declaration files support TypeScript 3.9 and current compilers.
+
+## Compatibility boundary
+
+Valid PostgreSQL scalar, array, date, interval, bytea, JSON, and binary values
+retain `pg-types@2.2.0` parser behavior. Node.js 4 or newer is supported.
+
+Parser registries use null-prototype dictionaries. The keys `__proto__`,
+`prototype`, and `constructor` cannot mutate shared prototypes. Malformed
+timestamp text must begin with a year. PostgreSQL emits that form; the guard
+removes the baseline repeated regular-expression scan for attacker-controlled
+prefixes without changing valid database output.
+
+## Production dependency closure
+
+The published package declares zero runtime dependencies. Exact compatible
+source from five former dependencies is maintained in-tree:
+
+- `pg-int8@1.0.1` (ISC) for 64-bit integer parsing;
+- `postgres-array@2.0.0` (MIT) for PostgreSQL arrays;
+- `postgres-bytea@1.0.1` (MIT) for bytea values;
+- `postgres-date@1.0.7` (MIT) for dates and timestamps;
+- `postgres-interval@1.2.0` (MIT) for intervals.
+
+The fixed-key extension formerly supplied by archived `xtend@4.0.2` uses a
+native assignment in the reviewed in-tree interval parser, so `xtend` is not
+installed. Complete source provenance and license notices ship with the
+artifact. Direct and historical-key alias consumers must have warning-free
+installs, valid recursive trees, and zero production audit findings.
+
+## node-postgres integration
+
+Direct parser consumers can use this package. Applications that access parsers
+through `pg.types` should use `@stackline/pg` after its compatible downstream
+release is available. The remediation order is `@stackline/pg-types`, then
+`@stackline/pg`, then `@stackline/ai-rag-postgres`.
+
+## Security and reporting
+
+Multi-megabyte malformed date, interval, array, and bytea inputs are exercised
+under hard child-process deadlines. Report an undisclosed vulnerability with
+GitHub private vulnerability reporting at
+https://github.com/alexandroit/stackline-pg-types/security/advisories/new.
+Do not disclose an unpatched vulnerability in a public issue.
+
+## License and provenance
+
+License: MIT. The complete Brian M. Carlson notice and all notices for derived
+parser source are retained in the published artifact. See LICENSE, NOTICE,
+DEPENDENCY_REVIEW.md, and THIRD_PARTY_LICENSES.md in the canonical
+documentation or source repository.

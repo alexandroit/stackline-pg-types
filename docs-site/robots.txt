@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /docs/vanilla/pg-types/
+
+Sitemap: https://alexandro.net/docs/vanilla/pg-types/sitemap.xml

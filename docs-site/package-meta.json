@@ -1,0 +1,9 @@
+{
+  "moduleFormat": "CommonJS and ESM",
+  "name": "@stackline/pg-types",
+  "productionDependencies": 0,
+  "runtimeFloor": "Node.js 4",
+  "types": "TypeScript 3.9-compatible declarations",
+  "upstreamBaseline": "pg-types 2.2.0",
+  "version": "1.0.0"
+}

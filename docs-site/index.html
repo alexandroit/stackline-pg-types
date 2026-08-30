@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="API, compatibility, migration, and dependency-closure documentation for @stackline/pg-types, a dependency-free PostgreSQL type parser package.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#07141d">
+  <title>Alexandro.Net — @stackline/pg-types PostgreSQL parser documentation</title>
+  <link rel="canonical" href="https://alexandro.net/docs/vanilla/pg-types/">
+  <link rel="alternate" type="text/plain" href="llms.txt" title="LLM summary">
+  <link rel="alternate" type="text/plain" href="llms-full.txt" title="Full LLM reference">
+  <meta property="og:title" content="@stackline/pg-types — dependency-free PostgreSQL type parsers">
+  <meta property="og:description" content="The pg-types 2.2.0 contract with zero runtime dependencies, current module entry points, first-party types, and bounded malformed-input handling.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://alexandro.net/docs/vanilla/pg-types/">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareSourceCode",
+    "name": "@stackline/pg-types",
+    "version": "1.0.0",
+    "description": "Dependency-free PostgreSQL type parsers compatible with pg-types 2.2.0.",
+    "codeRepository": "https://github.com/alexandroit/stackline-pg-types",
+    "downloadUrl": "https://www.npmjs.com/package/@stackline/pg-types",
+    "url": "https://alexandro.net/docs/vanilla/pg-types/",
+    "license": "https://opensource.org/license/mit",
+    "programmingLanguage": "JavaScript",
+    "runtimePlatform": "Node.js >=4"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="wordmark" href="https://alexandro.net/" aria-label="Alexandro.Net home">
+        <span>Alexandro.Net</span>
+        <span class="wordmark-subtitle">Open Source</span>
+      </a>
+      <nav class="top-nav" aria-label="Page navigation">
+        <a href="#install">Install</a>
+        <a href="#api">API</a>
+        <a href="#compatibility">Compatibility</a>
+        <a href="#closure">Dependency closure</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" tabindex="-1">
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow">PostgreSQL parsers · maintained compatibility</p>
+        <h1 id="page-title">@stackline/<span>pg-types</span></h1>
+        <p class="lead">The public <code>pg-types@2.2.0</code> parser contract, rebuilt as a dependency-free package with current ESM and TypeScript entry points.</p>
+        <ul class="badges" aria-label="Package facts">
+          <li>v1.0.0</li>
+          <li>Node.js ≥4</li>
+          <li>CommonJS + ESM</li>
+          <li>TypeScript 3.9+</li>
+          <li>Zero runtime dependencies</li>
+          <li>MIT</li>
+        </ul>
+        <div class="hero-actions" aria-label="Package resources">
+          <a class="button primary" href="https://www.npmjs.com/package/@stackline/pg-types">View on npm</a>
+          <a class="button secondary" href="https://github.com/alexandroit/stackline-pg-types">Source on GitHub</a>
+        </div>
+      </div>
+
+      <aside class="install-panel" id="install" aria-labelledby="install-title">
+        <p class="panel-kicker">Pinned install</p>
+        <h2 id="install-title">Choose a package identity</h2>
+
+        <div class="command-block">
+          <div class="command-heading">
+            <span>Direct scoped install</span>
+            <button type="button" hidden data-copy-target="direct-install">Copy</button>
+          </div>
+          <pre aria-label="Direct scoped npm install command"><code id="direct-install"><!--email_off-->npm install @stackline/pg-types@1.0.0<!--/email_off--></code></pre>
+        </div>
+
+        <div class="command-block">
+          <div class="command-heading">
+            <span>Keep <code>require('pg-types')</code></span>
+            <button type="button" hidden data-copy-target="alias-install">Copy</button>
+          </div>
+          <pre aria-label="Historical-key npm alias install command"><code id="alias-install"><!--email_off-->npm install pg-types@npm:@stackline/pg-types@1.0.0<!--/email_off--></code></pre>
+        </div>
+
+        <p class="microcopy">The npm alias keeps the historical <code>pg-types</code> dependency key and import path while resolving the maintained scoped package.</p>
+        <p class="copy-status" aria-live="polite" data-copy-status>Copy controls are an optional enhancement; all documentation works without JavaScript.</p>
+      </aside>
+    </section>
+
+    <section class="status-callout" aria-labelledby="closure-summary">
+      <div class="status-mark" aria-hidden="true">0</div>
+      <div>
+        <h2 id="closure-summary">No installed parser dependencies</h2>
+        <p>The former five-package parser chain is maintained in-tree with exact provenance and license notices. Archived <code>xtend@4.0.2</code> is removed from the production graph.</p>
+      </div>
+    </section>
+
+    <section class="section" id="api" aria-labelledby="api-title">
+      <div class="section-heading">
+        <p class="eyebrow">Public surface</p>
+        <h2 id="api-title">Register and resolve PostgreSQL parsers</h2>
+        <p>The root preserves the historical callable methods, parser factory, built-in OIDs, and <code>lib/*</code> entry points.</p>
+      </div>
+
+      <div class="method-grid">
+        <article class="method-card featured">
+          <p class="method-kind">Lookup</p>
+          <h3><code>getTypeParser(oid, format?)</code></h3>
+          <p>Returns the registered text or binary parser. Unknown OIDs retain the baseline identity-parser behavior.</p>
+        </article>
+        <article class="method-card">
+          <p class="method-kind">Registration</p>
+          <h3><code>setTypeParser(oid, parser)</code></h3>
+          <p>Registers a text parser while isolating dangerous property names from shared object prototypes.</p>
+        </article>
+        <article class="method-card">
+          <p class="method-kind">Registration</p>
+          <h3><code>setTypeParser(oid, format, parser)</code></h3>
+          <p>Registers a parser for the explicit <code>text</code> or <code>binary</code> format.</p>
+        </article>
+        <article class="method-card">
+          <p class="method-kind">Array parsing</p>
+          <h3><code>arrayParser.create(source, transform?)</code></h3>
+          <p>Creates the historical incremental PostgreSQL array parser with an optional value transform.</p>
+        </article>
+        <article class="method-card">
+          <p class="method-kind">OID constants</p>
+          <h3><code>builtins</code> and <code>TypeId</code></h3>
+          <p>Exports the complete 2.2.0 built-in OID map. <code>TypeId</code> is a non-enumerable runtime alias.</p>
+        </article>
+        <article class="method-card">
+          <p class="method-kind">Module formats</p>
+          <h3>CommonJS, ESM, and declarations</h3>
+          <p>CommonJS and ESM exports share function identities; TypeScript 3.9 and current compilers receive matching declarations.</p>
+        </article>
+      </div>
+
+      <div class="example-grid">
+        <article>
+          <p class="fact-label">Scoped import</p>
+          <pre><code>var types = require('@stackline/pg-types')
+var parse = types.getTypeParser(types.builtins.TIMESTAMPTZ)
+
+parse('2026-08-30 12:00:00+00')</code></pre>
+        </article>
+        <article>
+          <p class="fact-label">Custom parser</p>
+          <pre><code>var types = require('pg-types')
+
+types.setTypeParser(types.builtins.INT8, function (value) {
+  return parseInt(value, 10)
+})</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="compatibility" aria-labelledby="compatibility-title">
+      <div class="section-heading">
+        <p class="eyebrow">Compatibility boundary</p>
+        <h2 id="compatibility-title">Valid PostgreSQL values keep 2.2.0 behavior</h2>
+        <p>Scalar, array, date, interval, bytea, JSON, and binary fixtures preserve the baseline output. Hardening is deliberately limited to unsafe registry keys and malformed timestamp prefixes.</p>
+      </div>
+
+      <div class="boundary-grid">
+        <article>
+          <p class="fact-label">Preserved</p>
+          <h3>Parser results and overloads</h3>
+          <p>Text and binary registration, root enumerability, built-in OIDs, deep files, and parser output remain compatible.</p>
+        </article>
+        <article>
+          <p class="fact-label">Hardened</p>
+          <h3>Prototype-safe registries</h3>
+          <p><code>__proto__</code>, <code>prototype</code>, and <code>constructor</code> cannot mutate shared prototypes.</p>
+        </article>
+        <article>
+          <p class="fact-label">Bounded</p>
+          <h3>Malformed timestamps</h3>
+          <p>Timestamp text must begin with a year, matching PostgreSQL output and avoiding the baseline's repeated regex scan.</p>
+        </article>
+        <article>
+          <p class="fact-label">Additive</p>
+          <h3>Explicit ESM and runtime TypeId</h3>
+          <p>New entry points and the declaration-promised alias are additive without changing the enumerable CommonJS root.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="closure" aria-labelledby="dependency-title">
+      <div class="section-heading">
+        <p class="eyebrow">Production closure</p>
+        <h2 id="dependency-title">Five parser sources, one reviewed artifact</h2>
+        <p>The package vendors exact compatible source instead of installing the former transitive graph. Each component keeps its original notice.</p>
+      </div>
+
+      <div class="table-wrap" tabindex="0" aria-label="Scrollable parser component provenance table">
+        <table>
+          <caption>In-tree compatibility components and dependency decisions</caption>
+          <thead>
+            <tr>
+              <th scope="col">Baseline</th>
+              <th scope="col">License</th>
+              <th scope="col">Role</th>
+              <th scope="col">Installed children removed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row"><code>pg-int8@1.0.1</code></th><td>ISC</td><td>64-bit integer parsing</td><td>0</td></tr>
+            <tr><th scope="row"><code>postgres-array@2.0.0</code></th><td>MIT</td><td>Array parsing</td><td>0</td></tr>
+            <tr><th scope="row"><code>postgres-bytea@1.0.1</code></th><td>MIT</td><td>Bytea decoding</td><td>0</td></tr>
+            <tr><th scope="row"><code>postgres-date@1.0.7</code></th><td>MIT</td><td>Date and timestamp parsing</td><td>0</td></tr>
+            <tr><th scope="row"><code>postgres-interval@1.2.0</code></th><td>MIT</td><td>Interval parsing</td><td>1 — archived <code>xtend</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="chain" role="img" aria-label="Dependency remediation flows from @stackline/pg-types to @stackline/pg and then @stackline/ai-rag-postgres.">
+        <div><span>Leaf</span><strong>@stackline/pg-types</strong><small>published dependency-free parser</small></div>
+        <span class="chain-arrow" aria-hidden="true">→</span>
+        <div><span>Driver</span><strong>@stackline/pg</strong><small>complete node-postgres integration</small></div>
+        <span class="chain-arrow" aria-hidden="true">→</span>
+        <div><span>Consumer</span><strong>@stackline/ai-rag-postgres</strong><small>RAG PostgreSQL adapter</small></div>
+      </div>
+
+      <aside class="callout">
+        <h3>Use the right integration layer</h3>
+        <p>Applications that configure parsers directly can alias this package. Applications that consume parsers through <code>pg.types</code> should use the maintained <code>@stackline/pg</code> integration after that downstream release is available.</p>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="release-title">
+      <div class="section-heading">
+        <p class="eyebrow">Immutable release</p>
+        <h2 id="release-title">One artifact across every release surface</h2>
+        <p>Version 1.0.0 was built from commit <code>14f3e2103f190259a1ca515493034d159c08707a</code>. Verdaccio, official npm, and the GitHub release serve the same 16,581-byte tarball.</p>
+      </div>
+      <div class="callout">
+        <p class="fact-label">Artifact SHA-256</p>
+        <p><code>e627fe7a74bb5c83e1b4bbdccd06eef27cb216c1ac25ab38c9c50caf3fd4a488</code></p>
+        <p>The package contains 29 files, unpacks to 54,718 bytes, carries an npm registry signature, and declares no production dependencies. See the immutable <a href="https://github.com/alexandroit/stackline-pg-types/releases/tag/stackline-v1.0.0">GitHub release evidence</a>.</p>
+      </div>
+    </section>
+
+    <section class="section resources" aria-labelledby="resources-title">
+      <div class="section-heading compact">
+        <p class="eyebrow">Reference</p>
+        <h2 id="resources-title">Source-level documentation</h2>
+      </div>
+      <ul class="resource-list">
+        <li><a href="README.md">README and API overview</a></li>
+        <li><a href="COMPATIBILITY.md">Compatibility policy</a></li>
+        <li><a href="MIGRATION.md">Migration guide</a></li>
+        <li><a href="DEPENDENCY_REVIEW.md">Production dependency review</a></li>
+        <li><a href="SECURITY.md">Security and private reporting</a></li>
+        <li><a href="THIRD_PARTY_LICENSES.md">Third-party license inventory</a></li>
+        <li><a href="llms-full.txt">Full machine-readable reference</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><strong>Alexandro.Net</strong> documents independently maintained open-source software.</p>
+    <p><code>@stackline/pg-types</code> is not affiliated with or endorsed by Brian M. Carlson, node-postgres, PostgreSQL, or the original dependency maintainers. PostgreSQL is a trademark of the PostgreSQL Community Association of Canada.</p>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
