@@ -1,75 +1,88 @@
-# pg-types
+# @stackline/pg-types
 
-This is the code that turns all the raw text from postgres into JavaScript types for [node-postgres](https://github.com/brianc/node-postgres.git)
+[![npm](https://img.shields.io/npm/v/@stackline/pg-types)](https://www.npmjs.com/package/@stackline/pg-types)
+[![downloads](https://img.shields.io/npm/dm/@stackline/pg-types)](https://www.npmjs.com/package/@stackline/pg-types)
+[![CI](https://github.com/alexandroit/stackline-pg-types/actions/workflows/ci.yml/badge.svg)](https://github.com/alexandroit/stackline-pg-types/actions/workflows/ci.yml)
+[![license](https://img.shields.io/npm/l/@stackline/pg-types)](LICENSE)
 
-## use
+Dependency-free PostgreSQL result parsers with the public CommonJS and
+TypeScript contract of `pg-types@2.2.0`. This independent, maintained fork is
+the compatibility leaf used by `@stackline/pg`.
 
-This module is consumed and exported from the root `pg` object of node-postgres.  To access it, do the following:
+## Install
 
-```js
-var types = require('pg').types
+Direct scoped use:
+
+```bash
+npm install @stackline/pg-types
 ```
 
-Generally what you'll want to do is override how a specific data-type is parsed and turned into a JavaScript type.  By default the PostgreSQL backend server returns everything as strings.  Every data type corresponds to a unique `OID` within the server, and these `OIDs` are sent back with the query response.  So, you need to match a particluar `OID` to a function you'd like to use to take the raw text input and produce a valid JavaScript object as a result. `null` values are never parsed.
+Drop-in replacement without changing existing imports:
 
-Let's do something I commonly like to do on projects: return 64-bit integers `(int8)` as JavaScript integers.  Because JavaScript doesn't have support for 64-bit integers node-postgres cannot confidently parse `int8` data type results as numbers because if you have a _huge_ number it will overflow and the result you'd get back from node-postgres would not be the result in the datbase.  That would be a __very bad thing__ so node-postgres just returns `int8` results as strings and leaves the parsing up to you.  Let's say that you know you don't and wont ever have numbers greater than `int4` in your database, but you're tired of recieving results from the `COUNT(*)` function as strings (because that function returns `int8`).  You would do this:
+```bash
+npm install pg-types@npm:@stackline/pg-types
+```
 
 ```js
-var types = require('pg').types
-types.setTypeParser(20, function(val) {
-  return parseInt(val)
+var types = require('pg-types')
+
+types.setTypeParser(types.builtins.INT8, function (value) {
+  return parseInt(value, 10)
 })
 ```
 
-__boom__: now you get numbers instead of strings.
-
-Just as another example -- not saying this is a good idea -- let's say you want to return all dates from your database as [moment](http://momentjs.com/docs/) objects.  Okay, do this:
+The scoped form exposes the same API:
 
 ```js
-var types = require('pg').types
-var moment = require('moment')
-var parseFn = function(val) {
-   return val === null ? null : moment(val)
-}
-types.setTypeParser(types.builtins.TIMESTAMPTZ, parseFn)
-types.setTypeParser(types.builtins.TIMESTAMP, parseFn)
-```
-_note: I've never done that with my dates, and I'm not 100% sure moment can parse all the date strings returned from postgres.  It's just an example!_
+var types = require('@stackline/pg-types')
+var parseTimestamp = types.getTypeParser(types.builtins.TIMESTAMPTZ)
 
-If you're thinking "gee, this seems pretty handy, but how can I get a list of all the OIDs in the database and what they correspond to?!?!?!" worry not:
-
-```bash
-$ psql -c "select typname, oid, typarray from pg_type order by oid"
+console.log(parseTimestamp('2026-08-30 12:00:00+00'))
 ```
 
-If you want to find out the OID of a specific type:
+## Compatibility
 
-```bash
-$ psql -c "select typname, oid, typarray from pg_type where typname = 'daterange' order by oid"
-```
+- `getTypeParser(oid, format?)`
+- `setTypeParser(oid, parser)`
+- `setTypeParser(oid, format, parser)`
+- `arrayParser.create(source, transform?)`
+- `builtins`
+- `TypeId` as the runtime value promised by the historical declarations
+- CommonJS, Node.js 4 or newer and TypeScript 3.9 declarations
+- historical `pg-types` package name through npm aliasing
 
-:smile:
+Valid PostgreSQL values retain the `2.2.0` parser behavior. Dangerous parser
+map keys are isolated, and malformed timestamp processing is bounded instead
+of retrying a regular expression at every input position.
 
-## license
+See [COMPATIBILITY.md](COMPATIBILITY.md) and [MIGRATION.md](MIGRATION.md) for
+the complete contract.
 
-The MIT License (MIT)
+## Dependency Standard
 
-Copyright (c) 2014 Brian M. Carlson
+The published package has zero runtime dependencies. Exact source from the
+five historical parser dependencies is maintained in-tree so an abandoned
+transitive package cannot re-enter the install graph. Every release verifies
+a warning-free packed install, `npm ls --all`, production and full audits,
+license inventory, package metadata and runtime/type matrices.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+The source inventory and license notices are documented in
+[DEPENDENCY_REVIEW.md](DEPENDENCY_REVIEW.md) and
+[THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+## Security
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+Report vulnerabilities through [GitHub private vulnerability
+reporting](https://github.com/alexandroit/stackline-pg-types/security/advisories/new).
+Do not disclose an unpatched vulnerability in a public issue. See
+[SECURITY.md](SECURITY.md).
+
+## Documentation
+
+Public documentation: https://alexandro.net/docs/vanilla/pg-types/
+
+## License
+
+MIT. This fork preserves Brian M. Carlson's original notice and the complete
+notices for derived parser source. See [LICENSE](LICENSE), [NOTICE](NOTICE) and
+[THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).

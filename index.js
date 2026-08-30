@@ -7,11 +7,12 @@ exports.getTypeParser = getTypeParser;
 exports.setTypeParser = setTypeParser;
 exports.arrayParser = arrayParser;
 exports.builtins = builtinTypes;
+exports.TypeId = builtinTypes;
+Object.defineProperty(exports, 'TypeId', { enumerable: false });
 
-var typeParsers = {
-  text: {},
-  binary: {}
-};
+var typeParsers = Object.create(null);
+typeParsers.text = Object.create(null);
+typeParsers.binary = Object.create(null);
 
 //the empty parse function
 function noParse (val) {

@@ -1,24 +1,36 @@
 
-var test = require('tape')
-var printf = require('pff')
+'use strict'
+
+var assert = require('node:assert/strict')
+var legacyAssert = require('node:assert')
+var test = require('node:test')
 var getTypeParser = require('../').getTypeParser
 var types = require('./types')
 
-test('types', function (t) {
-  Object.keys(types).forEach(function (typeName) {
+var assertions = {
+  equal: function (actual, expected, message) {
+    assert.equal(actual, expected, message)
+  },
+  deepEqual: function (actual, expected, message) {
+    legacyAssert.deepEqual(actual, expected, message)
+  },
+  ok: function (value, message) {
+    assert.ok(value, message)
+  }
+}
+
+Object.keys(types).forEach(function (typeName) {
+  test(typeName, function () {
     var type = types[typeName]
-    t.test(typeName, function (t) {
-      var parser = getTypeParser(type.id, type.format)
-      type.tests.forEach(function (tests) {
-        var input = tests[0]
-        var expected = tests[1]
-        var result = parser(input)
-        if (typeof expected === 'function') {
-          return expected(t, result)
-        }
-        t.equal(result, expected)
-      })
-      t.end()
+    var parser = getTypeParser(type.id, type.format)
+    type.tests.forEach(function (tests) {
+      var input = tests[0]
+      var expected = tests[1]
+      var result = parser(input)
+      if (typeof expected === 'function') {
+        return expected(assertions, result)
+      }
+      assert.equal(result, expected)
     })
   })
 })

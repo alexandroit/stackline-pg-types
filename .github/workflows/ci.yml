@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags: ['stackline-v*']
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Tests, security, types, and package quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.15.0
+          cache: npm
+      - run: npm install --global npm@11.12.1
+      - run: npm ci
+      - run: npm run verify
+
+  package:
+    name: Packed production artifact
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.15.0
+          cache: npm
+      - run: npm install --global npm@11.12.1
+      - run: npm ci
+      - run: mkdir artifact
+      - run: npm pack --ignore-scripts --pack-destination artifact
+      - run: sha512sum artifact/*.tgz > artifact/SHA512SUMS
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: npm-package
+          path: artifact/
+          if-no-files-found: error
+          retention-days: 14
+
+  runtime:
+    name: Node.js ${{ matrix.node }} runtime
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [4.9.1, 6.17.1, 8.17.0, 10.24.1, 12.22.12, 14.21.3, 16.20.2, 18.20.8, 20.20.0, 22, 24]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.15.0
+      - run: npx --yes --package=node@${{ matrix.node }} node test/runtime-compat.js
+
+  typescript-39:
+    name: TypeScript 3.9 declarations
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.15.0
+          cache: npm
+      - run: npm ci
+      - run: node node_modules/typescript-3-9/bin/tsc -p test/types/tsconfig.legacy.json

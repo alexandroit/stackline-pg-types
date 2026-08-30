@@ -214,11 +214,11 @@ exports.bytea = {
   id: 17,
   tests: [
     ['foo\\000\\200\\\\\\377', function (t, value) {
-      var buffer = new Buffer([102, 111, 111, 0, 128, 92, 255])
+      var buffer = Buffer.from([102, 111, 111, 0, 128, 92, 255])
       t.ok(buffer.equals(value))
     }],
     ['', function (t, value) {
-      var buffer = new Buffer(0)
+      var buffer = Buffer.alloc(0)
       t.ok(buffer.equals(value))
     }]
   ]
@@ -269,13 +269,13 @@ exports['array/bytea'] = {
   id: 1001,
   tests: [
     ['{"\\\\x00000000"}', function (t, value) {
-      var buffer = new Buffer('00000000', 'hex')
+      var buffer = Buffer.from('00000000', 'hex')
       t.ok(Array.isArray(value))
       t.equal(value.length, 1)
       t.ok(buffer.equals(value[0]))
     }],
     ['{NULL,"\\\\x4e554c4c"}', function (t, value) {
-      var buffer = new Buffer('4e554c4c', 'hex')
+      var buffer = Buffer.from('4e554c4c', 'hex')
       t.ok(Array.isArray(value))
       t.equal(value.length, 2)
       t.equal(value[0], null)
@@ -513,7 +513,7 @@ exports['binary-bigint/int8'] = {
   format: 'binary',
   id: 20,
   tests: [
-    [new Buffer([0x7f, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]), '9223372036854775807']
+    [Buffer.from([0x7f, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]), '9223372036854775807']
   ]
 }
 
@@ -559,7 +559,7 @@ exports['binary-string'] = {
   id: 25,
   tests: [
     [
-      new Buffer(['0x73', '0x6c', '0x61', '0x64', '0x64', '0x61'].map(hex)),
+      Buffer.from(['0x73', '0x6c', '0x61', '0x64', '0x64', '0x61'].map(hex)),
       'sladda'
     ]
   ]

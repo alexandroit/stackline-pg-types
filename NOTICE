@@ -1,0 +1,13 @@
+@stackline/pg-types
+
+This package is an independently maintained fork derived from pg-types,
+originally developed by Brian M. Carlson and contributors.
+
+Upstream source: https://github.com/brianc/node-pg-types
+Public compatibility baseline: pg-types 2.2.0, commit
+d9d9dfb87eb50914043cbc178c301b7dd3b0c50d.
+
+Parser source from the exact historical runtime dependencies is maintained
+inside this package. The original notices are preserved in licenses/ and
+listed in THIRD_PARTY_LICENSES.md. Stackline is not affiliated with or
+endorsed by the node-postgres maintainers.
