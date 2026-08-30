@@ -43,6 +43,7 @@ var rootFiles = [
   'SECURITY.md',
   'CONTRIBUTING.md',
   'PUBLISHING.md',
+  'LICENSE',
   'NOTICE',
   'THIRD_PARTY_LICENSES.md'
 ]

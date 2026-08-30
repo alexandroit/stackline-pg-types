@@ -119,3 +119,52 @@ created. The exact `@stackline/pg-types@1.0.0` release therefore remains
 decision issue in a different repository. It continues to block a different
 package publication until that pair qualifies or an explicit user decision
 clears the checkpoint.
+
+### Documentation closure repair and adoption completion — 2026-08-30T16:33:56Z
+
+Fresh release reconciliation again found byte-identical official npm,
+Verdaccio, local candidate and immutable GitHub release artifacts. Direct
+scoped and historical-key alias consumers passed with valid single-node trees,
+zero dependency warnings and zero audit findings under Node 24.15.0. The
+supported recursive catalog audit passed all 53 installable Stackline packages
+and all 102 unique production nodes; its dated JSON SHA-256 is
+`fa4399563deb62731bfa81981bf5f69e200139da9e1bd6ca48ee27e1cc6dae60`.
+
+The public package sitemap exposed a release-closure defect: its advertised
+`LICENSE` route returned HTTP 404 because the deployed documentation manifest
+omitted that root file. The exact MIT license was deployed without changing
+Nginx, firewall or systemd configuration. The recovered production backup is
+`/var/backups/stackline-docs/20260830T160036Z-pg-types-license-repair`;
+the deployed and public file is 1,083 bytes at SHA-256
+`2c8a6e1b7782f0ca241792868af742f1c281c9661f59ec36c9acf40381c86645`.
+The local documentation gate now requires `LICENSE`, and publishing guidance
+requires exact readback for every sitemap root document. All 14 advertised
+package routes, root/package robots and sitemaps, localized `en`, `pt` and `fr`
+records, server-rendered home and browser search now pass. Origin and
+Cloudflare IPv4 plus remote Cloudflare IPv6 reads pass; listen drops and
+overflows remained unchanged at `694/0`.
+
+Fresh live dependency discovery then qualified a different-repository adoption
+pair. Yugabyte's maintained node-postgres fork directly declared and used the
+2.2-compatible root parser API. Pull request 17 preserves the historical key
+through `pg-types@npm:@stackline/pg-types@1.0.0`, adds focused scalar/array
+coverage and passed frozen install, build, unit, parser-smoke and PostgreSQL 11
+integration gates; its documented repository-wide failures match the pinned
+baseline:
+https://github.com/yugabyte/node-postgres/pull/17.
+
+Vertica's maintained driver directly declares and uses the parser registry for
+six Vertica OIDs, describes the bridge as temporary and requires an issue before
+a change. Issue 163 asks maintainers to choose among the compatibility alias,
+owned parsers, a semantics-audited 4.x migration or intentionally retaining the
+current bridge:
+https://github.com/vertica/vertica-nodejs/issues/163.
+
+Both contacts disclose independent `@stackline/pg-types` maintainership and
+publish no internal operating information or vulnerability claim. Immediate
+live deduplication found no prior Stackline contact or competing migration.
+Both URLs were fetched after creation and remain open. The repositories are
+different, so adoption coverage is `COMPLETE`, the exact-release checkpoint is
+cleared and the package's durable state is `PUBLISHED`. Incoming maintainer
+messages remain read-only. The immutable release tag and assets were not
+changed.
