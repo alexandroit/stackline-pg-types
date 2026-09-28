@@ -21,7 +21,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareSourceCode",
     "name": "@stackline/pg-types",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Dependency-free PostgreSQL type parsers compatible with pg-types 2.2.0.",
     "codeRepository": "https://github.com/alexandroit/stackline-pg-types",
     "downloadUrl": "https://www.npmjs.com/package/@stackline/pg-types",
@@ -55,9 +55,9 @@
       <div class="hero-copy">
         <p class="eyebrow">PostgreSQL parsers · maintained compatibility</p>
         <h1 id="page-title">@stackline/<span>pg-types</span></h1>
-        <p class="lead">The public <code>pg-types@2.2.0</code> parser contract, rebuilt as a dependency-free package with current ESM and TypeScript entry points.</p>
+        <p class="lead">The public <code><!--email_off-->pg-types@2.2.0<!--/email_off--></code> parser contract, rebuilt as a dependency-free package with current ESM and TypeScript entry points.</p>
         <ul class="badges" aria-label="Package facts">
-          <li>v1.0.0</li>
+          <li>v1.0.1</li>
           <li>Node.js ≥4</li>
           <li>CommonJS + ESM</li>
           <li>TypeScript 3.9+</li>
@@ -79,7 +79,7 @@
             <span>Direct scoped install</span>
             <button type="button" hidden data-copy-target="direct-install">Copy</button>
           </div>
-          <pre aria-label="Direct scoped npm install command"><code id="direct-install"><!--email_off-->npm install @stackline/pg-types@1.0.0<!--/email_off--></code></pre>
+          <pre aria-label="Direct scoped npm install command"><code id="direct-install"><!--email_off-->npm install @stackline/pg-types@1.0.1<!--/email_off--></code></pre>
         </div>
 
         <div class="command-block">
@@ -87,7 +87,7 @@
             <span>Keep <code>require('pg-types')</code></span>
             <button type="button" hidden data-copy-target="alias-install">Copy</button>
           </div>
-          <pre aria-label="Historical-key npm alias install command"><code id="alias-install"><!--email_off-->npm install pg-types@npm:@stackline/pg-types@1.0.0<!--/email_off--></code></pre>
+          <pre aria-label="Historical-key npm alias install command"><code id="alias-install"><!--email_off-->npm install pg-types@npm:@stackline/pg-types@1.0.1<!--/email_off--></code></pre>
         </div>
 
         <p class="microcopy">The npm alias keeps the historical <code>pg-types</code> dependency key and import path while resolving the maintained scoped package.</p>
@@ -99,7 +99,7 @@
       <div class="status-mark" aria-hidden="true">0</div>
       <div>
         <h2 id="closure-summary">No installed parser dependencies</h2>
-        <p>The former five-package parser chain is maintained in-tree with exact provenance and license notices. Archived <code>xtend@4.0.2</code> is removed from the production graph.</p>
+        <p>The former five-package parser chain is maintained in-tree with exact provenance and license notices. Archived <code><!--email_off-->xtend@4.0.2<!--/email_off--></code> is removed from the production graph.</p>
       </div>
     </section>
 
@@ -212,11 +212,11 @@ types.setTypeParser(types.builtins.INT8, function (value) {
             </tr>
           </thead>
           <tbody>
-            <tr><th scope="row"><code>pg-int8@1.0.1</code></th><td>ISC</td><td>64-bit integer parsing</td><td>0</td></tr>
-            <tr><th scope="row"><code>postgres-array@2.0.0</code></th><td>MIT</td><td>Array parsing</td><td>0</td></tr>
-            <tr><th scope="row"><code>postgres-bytea@1.0.1</code></th><td>MIT</td><td>Bytea decoding</td><td>0</td></tr>
-            <tr><th scope="row"><code>postgres-date@1.0.7</code></th><td>MIT</td><td>Date and timestamp parsing</td><td>0</td></tr>
-            <tr><th scope="row"><code>postgres-interval@1.2.0</code></th><td>MIT</td><td>Interval parsing</td><td>1 — archived <code>xtend</code></td></tr>
+            <tr><th scope="row"><code><!--email_off-->pg-int8@1.0.1<!--/email_off--></code></th><td>ISC</td><td>64-bit integer parsing</td><td>0</td></tr>
+            <tr><th scope="row"><code><!--email_off-->postgres-array@2.0.0<!--/email_off--></code></th><td>MIT</td><td>Array parsing</td><td>0</td></tr>
+            <tr><th scope="row"><code><!--email_off-->postgres-bytea@1.0.1<!--/email_off--></code></th><td>MIT</td><td>Bytea decoding</td><td>0</td></tr>
+            <tr><th scope="row"><code><!--email_off-->postgres-date@1.0.7<!--/email_off--></code></th><td>MIT</td><td>Date and timestamp parsing</td><td>0</td></tr>
+            <tr><th scope="row"><code><!--email_off-->postgres-interval@1.2.0<!--/email_off--></code></th><td>MIT</td><td>Interval parsing</td><td>1 — archived <code>xtend</code></td></tr>
           </tbody>
         </table>
       </div>
@@ -231,20 +231,20 @@ types.setTypeParser(types.builtins.INT8, function (value) {
 
       <aside class="callout">
         <h3>Use the right integration layer</h3>
-        <p>Applications that configure parsers directly can alias this package. Applications that consume parsers through <code>pg.types</code> should use the maintained <code>@stackline/pg</code> integration after that downstream release is available.</p>
+        <p>Applications that configure parsers directly can alias this package. Applications that consume parsers through <code>pg.types</code> should use the maintained <code>@stackline/pg</code> integration, now available on npm.</p>
       </aside>
     </section>
 
     <section class="section" aria-labelledby="release-title">
       <div class="section-heading">
-        <p class="eyebrow">Immutable release</p>
-        <h2 id="release-title">One artifact across every release surface</h2>
-        <p>Version 1.0.0 was built from commit <code>14f3e2103f190259a1ca515493034d159c08707a</code>. Verdaccio, official npm, and the GitHub release serve the same 16,581-byte tarball.</p>
+        <p class="eyebrow">Verified npm publication</p>
+        <h2 id="release-title">Published from GitHub Actions with provenance</h2>
+        <p>Version 1.0.1 was published from commit <code>4786606e1d55b9d3a158bbe86819f6db1653b68e</code>. The official npm tarball is 17,393 bytes and matches the reviewed release artifact byte for byte.</p>
       </div>
       <div class="callout">
         <p class="fact-label">Artifact SHA-256</p>
-        <p><code>e627fe7a74bb5c83e1b4bbdccd06eef27cb216c1ac25ab38c9c50caf3fd4a488</code></p>
-        <p>The package contains 29 files, unpacks to 54,718 bytes, carries an npm registry signature, and declares no production dependencies. See the immutable <a href="https://github.com/alexandroit/stackline-pg-types/releases/tag/stackline-v1.0.0">GitHub release evidence</a>.</p>
+        <p><code>14c023ee505bc9de5ffef67255fce657b82b09ad77dbf4320dcbfb1d543aab72</code></p>
+        <p>The package declares no production dependencies. Its signed npm provenance identifies the exact source commit and <a href="https://github.com/alexandroit/stackline-pg-types/actions/runs/36451108426">successful GitHub Actions publication</a>. Install the <a href="https://www.npmjs.com/package/@stackline/pg-types/v/1.0.1">verified npm release</a>.</p>
       </div>
     </section>
 

@@ -66,7 +66,7 @@ var packageMetadata = JSON.parse(site['package-meta.json'])
 var canonical = 'https://alexandro.net/docs/vanilla/pg-types/'
 
 assert(packageMetadata.name === '@stackline/pg-types', 'package metadata identity is wrong')
-assert(packageMetadata.version === '1.0.0', 'package metadata version is wrong')
+assert(packageMetadata.version === '1.0.1', 'package metadata version is wrong')
 assert(packageMetadata.runtimeFloor === 'Node.js 4', 'package metadata runtime floor is wrong')
 assert(packageMetadata.moduleFormat === 'CommonJS and ESM', 'package metadata module format is wrong')
 assert(packageMetadata.productionDependencies === 0, 'package metadata dependency count is wrong')
@@ -83,8 +83,8 @@ includesAll(visibleHtml, [
   'aria-live="polite"',
   'role="img"',
   '<caption>',
-  'npm install @stackline/pg-types@1.0.0',
-  'npm install pg-types@npm:@stackline/pg-types@1.0.0',
+  'npm install @stackline/pg-types@1.0.1',
+  'npm install pg-types@npm:@stackline/pg-types@1.0.1',
   'Node.js ≥4',
   'TypeScript 3.9+',
   'Zero runtime dependencies',
@@ -101,15 +101,15 @@ assert((html.match(/<h1(?:\s|>)/g) || []).length === 1, 'index.html must contain
 assert(html.length > 14000, 'index.html is unexpectedly thin')
 assert(html.indexOf('http://') === -1, 'index.html contains an insecure URL')
 assert(html.indexOf('localhost') === -1, 'index.html contains localhost')
-assert((html.match(/<!--email_off-->/g) || []).length === 2, 'index.html must protect two package-at-version strings')
-assert((html.match(/<!--\/email_off-->/g) || []).length === 2, 'email protection markers must balance')
+assert((html.match(/<!--email_off-->/g) || []).length === 9, 'index.html must protect 9 package-at-version text blocks')
+assert((html.match(/<!--\/email_off-->/g) || []).length === (html.match(/<!--email_off-->/g) || []).length, 'email protection markers must balance')
 
 var jsonLdMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)
 assert(jsonLdMatch, 'index.html is missing JSON-LD')
 var jsonLd = JSON.parse(jsonLdMatch[1])
 assert(jsonLd['@type'] === 'SoftwareSourceCode', 'JSON-LD type is wrong')
 assert(jsonLd.name === '@stackline/pg-types', 'JSON-LD package identity is wrong')
-assert(jsonLd.version === '1.0.0', 'JSON-LD package version is wrong')
+assert(jsonLd.version === '1.0.1', 'JSON-LD package version is wrong')
 assert(jsonLd.url === canonical, 'JSON-LD canonical URL is wrong')
 
 includesAll(css, [
@@ -141,9 +141,9 @@ locations.forEach(function (location) {
 
 ;[llms, llmsFull].forEach(function (value, index) {
   includesAll(value, [
-    '@stackline/pg-types@1.0.0',
+    '@stackline/pg-types@1.0.1',
     'pg-types@2.2.0',
-    'npm install pg-types@npm:@stackline/pg-types@1.0.0',
+    'npm install pg-types@npm:@stackline/pg-types@1.0.1',
     'Node.js 4',
     canonical,
     'zero runtime dependencies',

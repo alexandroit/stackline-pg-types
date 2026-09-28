@@ -19,7 +19,7 @@ In `package.json` the dependency is represented as:
 ```json
 {
   "dependencies": {
-    "pg-types": "npm:@stackline/pg-types@1.0.0"
+    "pg-types": "npm:@stackline/pg-types@1.0.1"
   }
 }
 ```

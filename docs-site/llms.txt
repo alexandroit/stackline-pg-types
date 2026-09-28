@@ -1,12 +1,12 @@
 # @stackline/pg-types
 
-`@stackline/pg-types@1.0.0` is an independent, dependency-free continuation of
+`@stackline/pg-types@1.0.1` is an independent, dependency-free continuation of
 `pg-types@2.2.0`. It preserves the CommonJS parser API, built-in PostgreSQL OID
 map, published `lib/*` entry points, valid-value parser results, Node.js 4
 support, and TypeScript 3.9 declarations. Explicit ESM exports are additive.
 
-- Direct install: `npm install @stackline/pg-types@1.0.0`
-- Historical-key alias: `npm install pg-types@npm:@stackline/pg-types@1.0.0`
+- Direct install: `npm install @stackline/pg-types@1.0.1`
+- Historical-key alias: `npm install pg-types@npm:@stackline/pg-types@1.0.1`
 - Documentation: https://alexandro.net/docs/vanilla/pg-types/
 - Package: https://www.npmjs.com/package/@stackline/pg-types
 - Repository: https://github.com/alexandroit/stackline-pg-types
