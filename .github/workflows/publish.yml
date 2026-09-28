@@ -23,11 +23,13 @@ jobs:
           ref: ${{ inputs.tag }}
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 24.15.0
+          node-version: 24.20.0
           registry-url: https://registry.npmjs.org
           cache: npm
       - run: npm install --global npm@11.12.1
       - run: test "${{ inputs.tag }}" = "stackline-v$(node -p \"require('./package.json').version\")"
+      - name: Pin the publishing npm CLI
+        run: npm install --global npm@11.19.0
       - run: npm ci
       - run: npm run verify
       - run: npm publish --access public --provenance
