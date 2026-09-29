@@ -1,6 +1,6 @@
 {
   "name": "@stackline/pg-types",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Dependency-free PostgreSQL type parsers compatible with pg-types 2.2.0",
   "type": "commonjs",
   "main": "./index.js",

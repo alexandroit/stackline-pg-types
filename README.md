@@ -4,13 +4,13 @@
 
 [![npm version](https://img.shields.io/npm/v/@stackline/pg-types.svg?style=flat-square)](https://www.npmjs.com/package/@stackline/pg-types)
 [![license](https://img.shields.io/npm/l/@stackline/pg-types.svg?style=flat-square)](https://github.com/alexandroit/stackline-pg-types)
-[![GitHub repository](https://img.shields.io/badge/GitHub-alexandroit%2Fstackline-pg-types-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-pg-types)
+[![GitHub repository](https://img.shields.io/badge/GitHub-repository-181717?style=flat-square&logo=github)](https://github.com/alexandroit/stackline-pg-types)
 [![Docs](https://img.shields.io/badge/docs-alexandro.net-0f766e?style=flat-square)](https://alexandro.net/docs/vanilla/pg-types/)
 [![Reddit community](https://img.shields.io/badge/community-r%2FStackline-ff4500?style=flat-square&logo=reddit&logoColor=white)](https://www.reddit.com/r/Stackline/)
 
 **[Documentation](https://alexandro.net/docs/vanilla/pg-types/)** | **[npm](https://www.npmjs.com/package/@stackline/pg-types)** | **[Issues](https://github.com/alexandroit/stackline-pg-types/issues)** | **[Repository](https://github.com/alexandroit/stackline-pg-types)**
 
-**Current package version:** `1.0.2`
+**Current package version:** `1.0.3`
 
 ---
 
@@ -24,7 +24,7 @@ the compatibility leaf used by `@stackline/pg`.
 
 | Item | Value |
 | --- | --- |
-| Package | `@stackline/pg-types@1.0.2` |
+| Package | `@stackline/pg-types@1.0.3` |
 | Node.js runtime | `>=4` |
 | CommonJS / primary entry | `./index.js` |
 | ES module entry | `./index.mjs` |
